@@ -5,3 +5,21 @@
 body {
     background-color: aquamarine;
 }
+
+
+img {
+    width: 100%;
+}
+
+.gallery-container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat( 5, 1fr);
+    min-height: 100vh;
+}
+
+
+.img-container {
+    display: flex;
+}
+
