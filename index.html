@@ -9,7 +9,7 @@
   </head>
   <body onload="init()">
     <h1>Hello</h1>
-
+    <header></header>
     <section class="gallery-container"></section>
 
     <section class="canvas-container">
@@ -24,16 +24,36 @@
       </canvas>
     </section>
 
-    <section class=".meme-controller">
-      <label>Meme Text</label>
-      <input type="text" name="memeTxt" onkeyup="onTextChange(this.value)" />
+    <section class="meme-controller">
+      <label>Meme Text:</label>
+      <input
+        type="text"
+        name="memeTxt"
+        onkeyup="onTextChange(this.value)"
+        placeholder="Enter Text Here"
+      />
+      <label>Font Color:</label>
+      <input
+        type="color"
+        name="memeFontColor"
+        oninput="changeFontColor(this.value)"
+      />
+      <label>Stroke Color:</label>
+      <input
+        type="color"
+        name="memeStrokeColor"
+        oninput="onChangeFontStroke(this.value)"
+      />
       <button onclick="onChangeFontSize(1)">+</button>
       <button onclick="onChangeFontSize(-1)">-</button>
       <button onclick="onSwitchLine()">SWITCH LINE</button>
-      <button onclick="onChangeLine(1)">↑</button>
-      <button onclick="onChangeLine(-1)">↓</button>
+      <button onclick="onMoveLine(1)">↑</button>
+      <button onclick="onMoveLine(-1)">↓</button>
     </section>
+    <footer></footer>
     <script src="js/meme-service.js"></script>
     <script src="js/controller.js"></script>
   </body>
 </html>
+
+

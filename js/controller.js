@@ -23,6 +23,13 @@ function renderGallery() {
   document.querySelector('.gallery-container').innerHTML = strHtmls.join('');
 }
 
+
+function onChooseImg(id){
+  changeImg(id)
+  drawImg();
+
+}
+
 function drawImg() {
   const img = new Image();
   let meme = getMeme();
@@ -51,14 +58,40 @@ function onChangeFontSize(size) {
   drawMeme();
 }
 
+function onChangeFontColor(color) {
+  changeFontColor(color);
+  drawMeme();
+}
+
+function onChangeFontStroke(stroke) {
+  changeFontStroke(stroke);
+  drawMeme();
+}
+
+function onMoveLine(direction) {
+  let meme = getMeme();
+  let lineId = meme.selectedLineIdx;
+  let txtY = meme.lines[lineId].y;
+  if (direction < 0) txtY += 35;
+  else txtY -= 35;
+
+  if (txtY <= 20 || txtY >= 390) return;
+
+  moveLine(txtY);
+  drawMeme();
+}
+
 function onSwitchLine() {
   let meme = getMeme();
   let lineId = meme.selectedLineIdx;
+  // let txt = meme.lines[lineId].txt;
   if (lineId >= 0) {
-    lineId ++;
+    lineId++;
   } else {
-    lineId --;
+    lineId--;
   }
+  // document.querySelector("input[name=memeTxt]").placeholder = txt;
+
   if (lineId < 0 || lineId >= meme.lines.length) lineId = 0;
 
   switchLine(lineId);
@@ -80,15 +113,12 @@ function drawMeme() {
 function drawLines(lines) {
   lines.forEach(function (line) {
     gCtx.fillStyle = `${line.color}`;
+    gCtx.strokeStyle = `${line.stroke}`;
     gCtx.font = `${line.size}px impact`;
     gCtx.fillText(line.txt, line.x, line.y);
+    gCtx.strokeText(line.txt, line.x, line.y);
   });
 }
-
-
-
-
-
 
 // function onChooseCanvsPlace(ev) {
 //   gOffsetX = ev.offsetX;
