@@ -1,30 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/style.css" />
     <title>MEME GENRATOR</title>
-</head>
-<body onload="init()">  
+  </head>
+  <body onload="init()">
+    <h1>Hello</h1>
 
-<h1>Hello</h1> 
+    <section class="gallery-container"></section>
 
-<section class="gallery-container"></section>
+    <section class="canvas-container">
+      <!-- <p contenteditable="true" class="top-line">sadsadasd</p> -->
+      <!-- <p contenteditable="true" class="bottom-line">sadsadasd</p> -->
+      <canvas
+        id="canvas"
+        height="400"
+        width="400"
+        style="border: 1px solid black"
+      >
+      </canvas>
+    </section>
 
-<section class="canvas.container">
-    <canvas id="canvas" height="400" width="400" onclick="draw(event)" style="border: 1px solid black;"></canvas>
-</section>
-
-
-<label>Meme Text</label>
-<input type="text" name="memeTxt" onchange="onTextChange(this.value)">
-
+    <section class=".meme-controller">
+      <label>Meme Text</label>
+      <input type="text" name="memeTxt" onkeyup="onTextChange(this.value)" />
+      <button onclick="onChangeFontSize(1)">+</button>
+      <button onclick="onChangeFontSize(-1)">-</button>
+      <button onclick="onSwitchLine()">SWITCH LINE</button>
+      <button onclick="onChangeLine(1)">↑</button>
+      <button onclick="onChangeLine(-1)">↓</button>
+    </section>
     <script src="js/meme-service.js"></script>
     <script src="js/controller.js"></script>
-</body>
+  </body>
 </html>
-
-
-

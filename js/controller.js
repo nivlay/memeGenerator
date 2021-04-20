@@ -2,7 +2,6 @@
 
 let gCanvas;
 let gCtx;
-let gImgId;
 // let gOffsetX;
 // let gOffsetY;
 
@@ -10,7 +9,7 @@ function init() {
   gCanvas = document.querySelector('#canvas');
   gCtx = gCanvas.getContext('2d');
   renderGallery();
-  drawImgFromlocal();
+  drawImg();
 }
 
 function renderGallery() {
@@ -24,59 +23,120 @@ function renderGallery() {
   document.querySelector('.gallery-container').innerHTML = strHtmls.join('');
 }
 
-function onChooseImg(id) {
-  gImgId = id;
-}
-console.log(gImgId);
-
-function drawImgFromlocal() {
+function drawImg() {
   const img = new Image();
-  //   let imgId = getMeme().selectedImgId;
-  img.src = `./img/${gImgId}.jpg`;
+  let meme = getMeme();
+  let imgId = meme.selectedImgId;
+  img.src = `./img/${imgId}.jpg`;
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
   };
 }
 
-function drawText() {
-  // gCtx.fillStyle = 'orange'
-  // gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height)
-  // gCtx.fillStyle = '#fff'
-  // gCtx.strokeStyle = 'green'
-  // gCtx.lineWidth = 5
-  let lineId = getMeme().selectedLineIdx;
-  let txt = getMeme().lines[lineId].txt;
-  let txtSize = getMeme().lines[lineId].size;
-  let txtAlign = getMeme().lines[lineId].align;
-  let txtColor = getMeme().lines[lineId].color;
-  gCtx.font = '40px Impact';
-  gCtx.fillText(txt, 100, 100);
-  gCtx.strokeText(txt, 100, 100);
+function onTextChange(txt) {
+  //Update the model with the new txt
+  changeText(txt);
+  drawMeme();
 }
 
-function draw(ev) {
-  // gCtx.save()
-  const offsetX = ev.offsetX;
-  const offsetY = ev.offsetY;
-  drawText();
-  // drawText('fafafasdasd', offsetX, offsetY)
-  //     switch (gCurrShape) {
-  //     case 'triangle':
-  //         drawTriangle(offsetX, offsetY)
-  //         break;
-  //     case 'rect':
-  //         drawRect(offsetX, offsetY)
-  //         break;
-  //     case 'text':
-  //         drawText('test', offsetX, offsetY)
-  //         break;
-  //     case 'line':
-  //         drawLine(offsetX, offsetY)
-  //         break;
-  // }
-  // gCtx.restore()
+function onChangeFontSize(size) {
+  let meme = getMeme();
+  let lineId = meme.selectedLineIdx;
+  let txtSize = meme.lines[lineId].size;
+  if (size > 0) txtSize += 5;
+  else txtSize -= 5;
+
+  //Update the model with the new font size
+  changeFontSize(txtSize);
+  drawMeme();
 }
 
-function onTextChange(elTxt) {
-  handleMemeTxt(elTxt);
+function onSwitchLine() {
+  let meme = getMeme();
+  let lineId = meme.selectedLineIdx;
+  if (lineId >= 0) {
+    lineId ++;
+  } else {
+    lineId --;
+  }
+  if (lineId < 0 || lineId >= meme.lines.length) lineId = 0;
+
+  switchLine(lineId);
+  drawMeme();
 }
+
+function drawMeme() {
+  let meme = getMeme();
+  const img = new Image();
+  let imgId = meme.selectedImgId;
+  img.src = `./img/${imgId}.jpg`;
+  //when img loading is done - run this function
+  img.onload = () => {
+    gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
+    drawLines(meme.lines);
+  };
+}
+
+function drawLines(lines) {
+  lines.forEach(function (line) {
+    gCtx.fillStyle = `${line.color}`;
+    gCtx.font = `${line.size}px impact`;
+    gCtx.fillText(line.txt, line.x, line.y);
+  });
+}
+
+
+
+
+
+
+// function onChooseCanvsPlace(ev) {
+//   gOffsetX = ev.offsetX;
+//   gOffsetY = ev.offsetY;
+// }
+
+// gCtx.fillRect(0, 0, canvas.width, canvas.height);
+
+// function draw(ev) {
+//   gCtx.save()
+//   const offsetX = ev.offsetX;
+//   const offsetY = ev.offsetY;
+//   drawText();
+//   drawText('fafafasdasd', offsetX, offsetY)
+//       switch (gCurrShape) {
+//       case 'triangle':
+//           drawTriangle(offsetX, offsetY)
+//           break;
+//       case 'rect':
+//           drawRect(offsetX, offsetY)
+//           break;
+//       case 'text':
+//           drawText('test', offsetX, offsetY)
+//           break;
+//       case 'line':
+//           drawLine(offsetX, offsetY)
+//           break;
+//   }
+//   gCtx.restore()
+// }
+
+// function drawText() {
+//   gCtx.fillStyle = 'orange'
+//   gCtx.fillRect(0, 0, gCanvas.width, gCanvas.height)
+//   gCtx.fillStyle = '#fff'
+//   gCtx.strokeStyle = 'green'
+//   gCtx.lineWidth = 5
+//   let meme = getMeme();
+//   let lineId = meme.selectedLineIdx;
+//   let txt = meme.lines[lineId].txt;
+//   let txtSize = meme.lines[lineId].size;
+//   let txtAlign = meme.lines[lineId].align;
+//   let txtColor = meme.lines[lineId].color;
+
+//   let topLine = document.querySelector('.top-line');
+//   let bottomLine = document.querySelector('.top-line');
+
+//   gCtx.font = '40px Impact';
+//   gCtx.fillText(txt, 100, 100);
+//   gCtx.strokeText(txt, 100, 100);
+// }

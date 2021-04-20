@@ -12,7 +12,8 @@ img {
 }
 
 .gallery-container {
-    display: grid;
+    /* display: grid; */
+    display: none;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat( 5, 1fr);
     min-height: 100vh;
@@ -23,3 +24,22 @@ img {
     display: flex;
 }
 
+.canvas-container {
+    position: relative;
+    text-align: center;
+    border:1px solid lightgrey;
+    height: 400px; 
+    width: 400px;
+    word-wrap:break-word;
+}
+.canvas-container p {
+    position: absolute;
+    display: block;
+    width: 100%;
+    font-size: 50px;
+}
+
+
+.bottom-line {
+    bottom: 0;
+}
