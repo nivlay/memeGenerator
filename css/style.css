@@ -114,3 +114,21 @@ img {
     height: 50px;
     margin: auto;
 }
+
+
+@media (max-width: 700px) {
+    .main-container {
+        display: none;
+        /* position: fixed; */
+        grid-template-columns: repeat(1, 1fr);
+        min-height: 80vh;
+        align-items: center;
+        justify-items: center;
+        background-color: #e3e3e3;
+    }
+
+
+    .logo img {
+        width: 80%;
+    }
+}
