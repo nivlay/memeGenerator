@@ -29,19 +29,23 @@ var gMeme = {
       txt: 'Sample Text',
       size: 50,
       align: 'left',
-      color: 'green',
-      stroke: 'red',
+      color: 'black',
+      stroke: 'white',
+      fontType: 'impact',
       x: 100,
       y: 50,
+      isFocus: false,
     },
     {
-      txt: 'Sample Text',
+      txt: 'SAMPLE TEXT',
       size: 50,
       align: 'left',
       color: 'black',
-      stroke: 'red',
+      stroke: 'white',
+      fontType: 'impact',
       x: 100,
       y: 350,
+      isFocus: false,
     },
   ],
 };
@@ -55,7 +59,7 @@ function getImgs() {
 }
 
 function changeImg(id) {
-  gMeme.selectedImgId = id
+  gMeme.selectedImgId = id;
 }
 
 function changeText(txt) {
@@ -80,4 +84,8 @@ function changeFontColor(color) {
 
 function changeFontStroke(stroke) {
   gMeme.lines[gMeme.selectedLineIdx].stroke = stroke;
+}
+
+function selectFontType(fontType) {
+  gMeme.lines[gMeme.selectedLineIdx].fontType = fontType;
 }

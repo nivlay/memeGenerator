@@ -8,52 +8,80 @@
     <title>MEME GENRATOR</title>
   </head>
   <body onload="init()">
-    <h1>Hello</h1>
-    <header></header>
+    <header class="main-header">
+      <div class="head-container">
+        <div class="logo"><img src="img/LOGO.png" /></div>
+        <ul class="nav">
+          <li><a onclick="onShowGallery()" href="#">GALLERY</a></li>
+          <li><a href="#"> MEMES</a></li>
+          <li><a href="#">ABOUT</a></li>
+        </ul>
+      </div>
+    </header>
+
     <section class="gallery-container"></section>
 
-    <section class="canvas-container">
-      <!-- <p contenteditable="true" class="top-line">sadsadasd</p> -->
-      <!-- <p contenteditable="true" class="bottom-line">sadsadasd</p> -->
-      <canvas
-        id="canvas"
-        height="400"
-        width="400"
-        style="border: 1px solid black"
-      >
-      </canvas>
-    </section>
+    <main class="main-container">
+      <section class="canvas-container">
+        <canvas
+          id="canvas"
+          height="400"
+          width="400"
+          style="border: 1px solid black"
+        >
+        </canvas>
+      </section>
 
-    <section class="meme-controller">
-      <label>Meme Text:</label>
-      <input
-        type="text"
-        name="memeTxt"
-        onkeyup="onTextChange(this.value)"
-        placeholder="Enter Text Here"
-      />
-      <label>Font Color:</label>
-      <input
-        type="color"
-        name="memeFontColor"
-        oninput="changeFontColor(this.value)"
-      />
-      <label>Stroke Color:</label>
-      <input
-        type="color"
-        name="memeStrokeColor"
-        oninput="onChangeFontStroke(this.value)"
-      />
-      <button onclick="onChangeFontSize(1)">+</button>
-      <button onclick="onChangeFontSize(-1)">-</button>
-      <button onclick="onSwitchLine()">SWITCH LINE</button>
-      <button onclick="onMoveLine(1)">↑</button>
-      <button onclick="onMoveLine(-1)">↓</button>
-    </section>
-    <footer></footer>
+      <section class="meme-controller">
+        <label>Meme Text:</label>
+        <input
+          type="text"
+          name="memeTxt"
+          onkeyup="onTextChange(this.value)"
+          placeholder="Enter Text Here"
+        />
+        <div class="line-controller-container">
+          <button onclick="onSwitchLine()">SWITCH LINE</button>
+          <button onclick="onMoveLine(1)">↑</button>
+          <button onclick="onMoveLine(-1)">↓</button>
+        </div>
+        <div class="font-controller-container">
+          <button onclick="onChangeFontSize(1)">A+</button>
+          <button onclick="onChangeFontSize(-1)">A-</button>
+          <select name="font-selector" onchange="onSelectFontType(this.value)">
+            <option value="impact">IMPACT</option>
+            <option value="arial">ARIAL</option>
+            <option value="verdana">VERDANA</option>
+          </select>
+          <label>Font Color:</label>
+          <input
+            type="color"
+            name="memeFontColor"
+            oninput="changeFontColor(this.value)"
+          />
+          <label>Stroke Color:</label>
+          <input
+            type="color"
+            name="memeStrokeColor"
+            oninput="onChangeFontStroke(this.value)"
+          />
+        </div>
+        <button>
+          <a
+            href="#"
+            class="download-btn"
+            onclick="downloadImg(this)"
+            download="my-img.jpg"
+            >Download</a
+          >
+        </button>
+      </section>
+    </main>
+    <footer class="footer-container">
+      <div class="logo"><img src="img/LOGO.png" /></div>
+      <h2>All rights reserved 2019©</h2>
+    </footer>
     <script src="js/meme-service.js"></script>
     <script src="js/controller.js"></script>
   </body>
 </html>
-
-
