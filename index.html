@@ -8,6 +8,8 @@
     <title>MEME GENRATOR</title>
   </head>
   <body onload="init()">
+    <div class="main-screen" onclick="toggleMenu()"></div>
+
     <header class="main-header">
       <div class="head-container">
         <div class="logo"><img src="img/LOGO.png" /></div>
@@ -16,6 +18,14 @@
           <li><a href="#"> MEMES</a></li>
           <li><a href="#">ABOUT</a></li>
         </ul>
+        <div onclick="toggleMenu(this)" class="nav-icon flex">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
       </div>
     </header>
 

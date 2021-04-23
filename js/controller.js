@@ -3,7 +3,6 @@
 let gCanvas;
 let gCtx;
 
-
 function init() {
   gCanvas = document.querySelector('#canvas');
   gCtx = gCanvas.getContext('2d');
@@ -33,7 +32,7 @@ function drawImg() {
   const img = new Image();
   let meme = getMeme();
   let imgId = meme.selectedImgId;
-  img.src = `./img/${imgId}.jpg`;
+  img.src = `img/${imgId}.jpg`;
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
   };
@@ -96,7 +95,7 @@ function onSwitchLine() {
   } else {
     lineId--;
   }
-  
+
   if (lineId < 0 || lineId >= meme.lines.length) lineId = 0;
 
   switchLine(lineId);
@@ -107,7 +106,7 @@ function drawMeme() {
   let meme = getMeme();
   const img = new Image();
   let imgId = meme.selectedImgId;
-  img.src = `./img/${imgId}.jpg`;
+  img.src = `img/${imgId}.jpg`;
   //when img loading is done - run this function
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gCanvas.width, gCanvas.height);
@@ -117,7 +116,6 @@ function drawMeme() {
 
 function drawLines(lines) {
   lines.forEach(function (line) {
-   
     gCtx.fillStyle = `${line.color}`;
     gCtx.strokeStyle = `${line.stroke}`;
     gCtx.font = `${line.size}px ${line.fontType}`;
@@ -131,7 +129,24 @@ function downloadImg(elLink) {
   elLink.href = imgContent;
 }
 
-function onShowGallery(){
+function onShowGallery() {
   document.querySelector('.gallery-container').style.display = 'grid';
   document.querySelector('.main-container').style.display = 'none';
+}
+
+function toggleMenu(elMenuBtn) {
+  elMenuBtn.classList.toggle('open');
+
+  document.body.classList.toggle('menu-open');
+  const hamburgerBtn = document.querySelector('.hamburger');
+  const btns = document.querySelectorAll('.card-btn');
+  if (document.body.classList.contains('menu-open')) {
+    btns.forEach((btn) => {
+      btn.style.zIndex = '-1';
+    });
+  } else {
+    btns.forEach((btn) => {
+      btn.style.zIndex = '0';
+    });
+  }
 }
